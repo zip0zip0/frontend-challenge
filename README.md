@@ -2,14 +2,14 @@
 A small programming challenge for applicants for frontend positions in Sesam.
 
 # Overview
-This task is designed to test some general skills that are important for a frontend developer without being too time-consuming. Some of the things you encounter while working on this task: Git, GitHub, a JSON REST API, JavaScript (React), CSS.
+This task is designed to test some general skills that are important for a frontend/fullstack developer without being too time-consuming. Some of the things you encounter while working on this task: Git, GitHub, a JSON REST API, JavaScript (React), CSS.
 
 # Setup
 Fork this repository to your own GitHub account as a private repository (don't create pull requests to https://github.com/sesam-io/frontend-challenge directly). Add `@branislavjenco`, `@BaardBouvet` and `@grove` as collaborators (you can do this when you are finished or right at the start). This repository has an empty [Create React App](https://github.com/facebook/create-react-app) application set up under the `/frontend-challenge` directory so that you don't have to worry about setting up the development environment. 
-Run `yarn install` in thet `/frontend-challenge` directory to install the dependencies. After that, you can just run `yarn start` to spin up the development server and work on files in the `/src` directory.
+You'll need `Node.js` installed along with `yarn` or `npm`. Run `yarn install` in the `/frontend-challenge` directory to install the dependencies. After that, you can just run `yarn start` to spin up the development server and work on files in the `/src` directory.
 
 # Task
-We want you to create a very simple React single-page application for browsing around a group of users. Use the public [JSON Placeholder API](https://jsonplaceholder.typicode.com/), specifically the `https://jsonplaceholder.typicode.com/users` endpoint, which returns a JSON array of 10 users. One of the users objects looks something like this:
+We want you to create a very simple React single-page application for browsing around a group of users. Use the public [JSON Placeholder API](https://jsonplaceholder.typicode.com/), specifically the `https://jsonplaceholder.typicode.com/users` endpoint, which returns a JSON array of 10 users. One of the user objects looks something like this:
 ```
 {
     "id": 4,
