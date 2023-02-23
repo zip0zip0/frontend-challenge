@@ -5,7 +5,7 @@ A small programming challenge for applicants for frontend positions in Sesam.
 This task is designed to test some general skills that are important for a frontend/fullstack developer without being too time-consuming. Some of the things you encounter while working on this task: Git, GitHub, a JSON REST API, JavaScript (React), CSS.
 
 # Setup
-Fork this repository to your own GitHub account as a *private repository* (don't create pull requests to https://github.com/sesam-io/frontend-challenge directly). Add `@branislavjenco`, `@BaardBouvet` and `@grove` as collaborators (you can do this when you are finished or right at the start). This repository has an empty [Create React App](https://github.com/facebook/create-react-app) application set up under the `/frontend-challenge` directory so that you don't have to worry about setting up the development environment. 
+Fork this repository to your own GitHub account as a _private repository_ (don't create pull requests to https://github.com/sesam-io/frontend-challenge directly). Add `@branislavjenco`, `@BaardBouvet` and `@grove` as collaborators (you can do this when you are finished or right at the start). This repository has an empty [Create React App](https://github.com/facebook/create-react-app) application set up under the `/frontend-challenge` directory so that you don't have to worry about setting up the development environment. 
 You'll need `Node.js` installed along with `yarn` or `npm`. Run `yarn install` in the `/frontend-challenge` directory to install the dependencies. After that, you can just run `yarn start` to spin up the development server and work on files in the `/src` directory.
 
 # Task
