@@ -1,6 +1,7 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
 import {useEffect, useState} from 'react'
 import { Users } from '../types/user';
+import * as css from './User.module.scss'
 
 export default function User() {
     const [users, setUsers] = useState<Users>([]);
@@ -28,13 +29,16 @@ export default function User() {
         }
     }
 
+    // fetch data on component mount
     useEffect(() => {
-    fetchData();
+        fetchData();
     }, []);
 
     return (
-        <div>
-            <button onClick={() => console.log(users)}>Fetch Data</button>
+        <div className={css.main} >
+            <div className={css.dataGrid}>
+                <button onClick={() => console.log(users)}>Fetch Data</button>
+            </div>
         </div>
     )
 }
