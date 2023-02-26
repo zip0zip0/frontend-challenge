@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { Users } from '../types/user';
 
 export default function User() {
     /**
@@ -15,10 +16,9 @@ export default function User() {
             const response = await fetch('https://jsonplaceholder.typicode.com/users');
             data = await response.json();
             console.log(data);
-            return data;
+            return data as Users;
         } catch (err) {
             console.log(err);
-            return data;
         } finally {
             clearTimeout(timeOut);
         }
