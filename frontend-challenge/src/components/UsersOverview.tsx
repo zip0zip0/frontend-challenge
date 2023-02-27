@@ -1,6 +1,6 @@
-import { Card, CardContent, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { Users } from '../types/user';
+import UserCard from './UserCard';
 import * as css from './UsersOverview.module.scss';
 
 export default function UsersOverview() {
@@ -11,7 +11,7 @@ export default function UsersOverview() {
      * @returns {Promise}
      */
     const fetchData = async () => {
-        let data = [];
+        let data: SetStateAction<Users> = [];
         // cancel request after 3 seconds
         const controller = new AbortController();
         const timeOut = setTimeout(() => controller.abort(), 3000);
@@ -40,23 +40,7 @@ export default function UsersOverview() {
         <div className={css.main}>
             <div className={css.dataGrid}>
                 {users.map((user) => (
-                    <Card
-                        key={user.id}
-                        sx={{ maxWidth: 345, marginBottom: 2, borderRadius: 5 }}
-                    >
-                        <CardContent>
-                            <Typography
-                                gutterBottom
-                                variant="h5"
-                                component="div"
-                            >
-                                {user.name}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                {user.company.name}
-                            </Typography>
-                        </CardContent>
-                    </Card>
+                    <UserCard key={user.id} user={user} />
                 ))}
             </div>
         </div>
