@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import {useEffect, useState} from 'react'
 import { Users } from '../types/user';
 import * as css from './User.module.scss'
@@ -37,7 +37,18 @@ export default function User() {
     return (
         <div className={css.main} >
             <div className={css.dataGrid}>
-                <button onClick={() => console.log(users)}>Fetch Data</button>
+                {users.map((user) => (
+                    <Card key={user.id} sx={{ maxWidth: 345, marginBottom: 2, borderRadius: 5 }}>
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                {user.name}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                {user.company.name}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                ))}
             </div>
         </div>
     )
