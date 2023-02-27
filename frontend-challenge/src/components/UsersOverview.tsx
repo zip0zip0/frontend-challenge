@@ -1,7 +1,7 @@
-import { Card, CardContent, Typography } from "@mui/material";
-import {useEffect, useState} from 'react'
+import { Card, CardContent, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { Users } from '../types/user';
-import * as css from './UsersOverview.module.scss'
+import * as css from './UsersOverview.module.scss';
 
 export default function UsersOverview() {
     const [users, setUsers] = useState<Users>([]);
@@ -17,8 +17,10 @@ export default function UsersOverview() {
         const timeOut = setTimeout(() => controller.abort(), 3000);
 
         try {
-            const response = await fetch('https://jsonplaceholder.typicode.com/users');
-            data = await response.json() as Users;
+            const response = await fetch(
+                'https://jsonplaceholder.typicode.com/users'
+            );
+            data = (await response.json()) as Users;
             console.log(data);
             setUsers(data);
         } catch (err) {
@@ -27,7 +29,7 @@ export default function UsersOverview() {
         } finally {
             clearTimeout(timeOut);
         }
-    }
+    };
 
     // fetch data on component mount
     useEffect(() => {
@@ -35,12 +37,19 @@ export default function UsersOverview() {
     }, []);
 
     return (
-        <div className={css.main} >
+        <div className={css.main}>
             <div className={css.dataGrid}>
                 {users.map((user) => (
-                    <Card key={user.id} sx={{ maxWidth: 345, marginBottom: 2, borderRadius: 5 }}>
+                    <Card
+                        key={user.id}
+                        sx={{ maxWidth: 345, marginBottom: 2, borderRadius: 5 }}
+                    >
                         <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
+                            <Typography
+                                gutterBottom
+                                variant="h5"
+                                component="div"
+                            >
                                 {user.name}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
@@ -51,7 +60,7 @@ export default function UsersOverview() {
                 ))}
             </div>
         </div>
-    )
+    );
 }
 
-// based on this datastructure, with React and Typescript, use Material UI v5 card component to display 
+// based on this datastructure, with React and Typescript, use Material UI v5 card component to display
