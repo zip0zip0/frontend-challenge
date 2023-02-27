@@ -1,9 +1,9 @@
-import User from "./components/User";
+import UsersOverview from "./components/UsersOverview";
 
 function App() {
     return (
         <div>
-            <User />
+            <UsersOverview />
         </div>
     );
 }
