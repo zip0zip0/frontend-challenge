@@ -15,7 +15,7 @@ import { useRef, useState } from 'react';
 type Props = {
     search: string;
     setSearch: (search: string) => void;
-    sortBy: string;
+    sortBy: 'name' | 'city' | 'company';
     setSortBy: (sortBy: string) => void;
 };
 

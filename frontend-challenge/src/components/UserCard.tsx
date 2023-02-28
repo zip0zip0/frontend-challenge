@@ -2,6 +2,12 @@ import { Card, CardContent, Typography } from '@mui/material';
 import { User } from '../types/user';
 import { makeStyles } from '@material-ui/core/styles';
 
+type Props = {
+    user: User;
+    setSelectedUser: (user: User) => void;
+    setOpenDialog: (opened: boolean) => void;
+};
+
 const useStyles = makeStyles({
     card: {
         backgroundColor: 'offwhite !important',
@@ -15,13 +21,17 @@ const useStyles = makeStyles({
     },
 });
 
-export default function UserCard({ user }: { user: User }) {
+export default function UserCard({ user, setSelectedUser, setOpenDialog }: Props) {
     const css = useStyles();
 
     return (
         <Card
             className={css.card}
             sx={{ maxWidth: 345, marginBottom: 2, borderRadius: 5 }}
+            onClick={() => {
+                setSelectedUser(user);
+                setOpenDialog(true);
+            }}
         >
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">

@@ -1,9 +1,10 @@
 import { SetStateAction, useEffect, useState } from 'react';
-import { Users } from '../types/user';
+import { User, Users } from '../types/user';
 import UserCard from './UserCard';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchAndSort from './SearchAndSort';
 import { sortBy as sortByLodash } from 'lodash';
+import UserDialog from './UserDialog';
 
 const useStyles = makeStyles({
     main: {
@@ -28,6 +29,8 @@ export default function UsersOverview() {
     const [search, setSearch] = useState<string>('');
     const [sortBy, setSortBy] = useState<'name' | 'city' | 'company'>('name');
     const [applySort, setApplySort] = useState<boolean>(false);
+    const [selectedUser, setSelectedUser] = useState<User | null>(null);
+    const [openDialog, setOpenDialog] = useState<boolean>(false);
 
     useEffect(() => {
         setUsersToView(users);
@@ -98,20 +101,32 @@ export default function UsersOverview() {
     }, []);
 
     return (
-        <div className={css.main}>
-            <SearchAndSort
-                search={search}
-                setSearch={setSearch}
-                sortBy={sortBy}
-                setSortBy={setSortBy}
-            />
-            <div className={css.dataGrid}>
-                {usersToView.map((user) => (
-                    <UserCard key={user.id} user={user} />
-                ))}
+        <>
+            <div className={css.main}>
+                <SearchAndSort
+                    search={search}
+                    setSearch={setSearch}
+                    sortBy={sortBy}
+                    setSortBy={setSortBy}
+                />
+                <div className={css.dataGrid}>
+                    {usersToView.map((user) => (
+                        <UserCard
+                            setSelectedUser={setSelectedUser}
+                            setOpenDialog={setOpenDialog}
+                            key={user.id}
+                            user={user}
+                        />
+                    ))}
+                </div>
             </div>
-        </div>
+            { selectedUser !== null &&
+                <UserDialog
+                    open={openDialog}
+                    onClose={() => setOpenDialog(false)}
+                    user={selectedUser}
+                />
+            }
+        </>
     );
 }
-
-// based on this datastructure, with React and Typescript, use Material UI v5 card component to display
