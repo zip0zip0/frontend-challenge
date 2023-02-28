@@ -1,9 +1,28 @@
 import { SetStateAction, useEffect, useState } from 'react';
 import { Users } from '../types/user';
 import UserCard from './UserCard';
-import * as css from './UsersOverview.module.scss';
+import { makeStyles } from '@material-ui/core/styles';
+import SearchAndSort from './SearchAndSort';
+
+
+const useStyles = makeStyles({
+    main: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        height: '100vh',
+        width: '100vw',
+    },
+    dataGrid: {
+        display: 'grid',
+        marginTop: '20px',
+        gridTemplateColumns: '1fr 1fr 1fr',
+        gridGap: '10px',
+    },
+});
 
 export default function UsersOverview() {
+    const css = useStyles();
     const [users, setUsers] = useState<Users>([]);
 
     /**
@@ -12,7 +31,6 @@ export default function UsersOverview() {
      */
     const fetchData = async () => {
         let data: SetStateAction<Users> = [];
-        // cancel request after 3 seconds
         const controller = new AbortController();
         const timeOut = setTimeout(() => controller.abort(), 3000);
 
@@ -26,6 +44,7 @@ export default function UsersOverview() {
         } catch (err) {
             console.log(err);
             console.log(data);
+            // TODO: handle error
         } finally {
             clearTimeout(timeOut);
         }
@@ -38,6 +57,7 @@ export default function UsersOverview() {
 
     return (
         <div className={css.main}>
+            <SearchAndSort />
             <div className={css.dataGrid}>
                 {users.map((user) => (
                     <UserCard key={user.id} user={user} />
