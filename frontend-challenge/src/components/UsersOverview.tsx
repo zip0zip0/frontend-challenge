@@ -17,7 +17,7 @@ const useStyles = makeStyles({
         display: 'grid',
         marginTop: '20px',
         gridTemplateColumns: '1fr 1fr 1fr',
-        gridGap: '10px',
+        gridGap: '20px',
     },
 });
 
@@ -31,6 +31,7 @@ export default function UsersOverview() {
 
     useEffect(() => {
         setUsersToView(users);
+        setApplySort(true);
     }, [users]);
 
     useEffect(() => {

@@ -70,6 +70,7 @@ export default function SearchAndSort({
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 autoFocus
+                onKeyUp={(e) => e.key === 'Escape' && setSearch('')}
             />
             <Divider
                 sx={{ height: 28, m: 0.5 }}
