@@ -3,7 +3,7 @@ import { Users } from '../types/user';
 import UserCard from './UserCard';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchAndSort from './SearchAndSort';
-
+import { sortBy as sortByLodash } from 'lodash';
 
 const useStyles = makeStyles({
     main: {
@@ -24,6 +24,47 @@ const useStyles = makeStyles({
 export default function UsersOverview() {
     const css = useStyles();
     const [users, setUsers] = useState<Users>([]);
+    const [usersToView, setUsersToView] = useState<Users>([]);
+    const [search, setSearch] = useState<string>('');
+    const [sortBy, setSortBy] = useState<'name' | 'city' | 'company'>('name');
+    const [applySort, setApplySort] = useState<boolean>(false);
+
+    useEffect(() => {
+        setUsersToView(users);
+    }, [users]);
+
+    useEffect(() => {
+        setApplySort(true);
+    }, [sortBy]);
+
+    // applies search on 'name'
+    useEffect(() => {
+        if (search) {
+            const filteredUsers = users.filter((user) =>
+                user.name.toLowerCase().includes(search.toLowerCase())
+            );
+            setUsersToView(filteredUsers);
+        } else {
+            setUsersToView(users);
+        }
+    }, [search, users]);
+
+    // applies sort, based on 'name', 'city' or 'company'
+    useEffect(() => {
+        if (applySort) {
+            if (sortBy === 'name') {
+                const sortedUsers = sortByLodash(usersToView, 'name');
+                setUsersToView(sortedUsers);
+            } else if (sortBy === 'city') {
+                const sortedUsers = sortByLodash(usersToView, 'address.city');
+                setUsersToView(sortedUsers);
+            } else if (sortBy === 'company') {
+                const sortedUsers = sortByLodash(usersToView, 'company.name');
+                setUsersToView(sortedUsers);
+            }
+            setApplySort(false);
+        }
+    }, [sortBy, usersToView, applySort]);
 
     /**
      * @description fetch data from api
@@ -57,9 +98,14 @@ export default function UsersOverview() {
 
     return (
         <div className={css.main}>
-            <SearchAndSort />
+            <SearchAndSort
+                search={search}
+                setSearch={setSearch}
+                sortBy={sortBy}
+                setSortBy={setSortBy}
+            />
             <div className={css.dataGrid}>
-                {users.map((user) => (
+                {usersToView.map((user) => (
                     <UserCard key={user.id} user={user} />
                 ))}
             </div>

@@ -12,7 +12,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useRef, useState } from 'react';
 
-type Props = {};
+type Props = {
+    search: string;
+    setSearch: (search: string) => void;
+    sortBy: string;
+    setSortBy: (sortBy: string) => void;
+};
 
 const useStyles = makeStyles((theme: Theme) => ({
     main: {
@@ -34,12 +39,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-export default function SearchAndSort({}: Props) {
+export default function SearchAndSort({
+    search,
+    setSearch,
+    sortBy,
+    setSortBy,
+}: Props) {
     const css = useStyles();
     const anchorRef = useRef<HTMLButtonElement>(null);
     const [openMenu, setOpenMenu] = useState(false);
-    const [sortBy, setSortBy] = useState('name');
-    const [search, setSearch] = useState('');
 
     return (
         <Paper
@@ -68,7 +76,7 @@ export default function SearchAndSort({}: Props) {
                 orientation="vertical"
                 className={css.divider}
             />
-            <Tooltip title="Sort contact by" placement='top' arrow>
+            <Tooltip title="Sort contact by" placement="top" arrow>
                 <IconButton
                     sx={{ p: '10px' }}
                     aria-label="directions"
