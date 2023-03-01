@@ -84,11 +84,9 @@ export default function UsersOverview() {
                 'https://jsonplaceholder.typicode.com/users'
             );
             data = (await response.json()) as Users;
-            console.log(data);
             setUsers(data);
         } catch (err) {
-            console.log(err);
-            console.log(data);
+            console.error(err);
             // TODO: handle error
         } finally {
             clearTimeout(timeOut);
@@ -102,7 +100,7 @@ export default function UsersOverview() {
 
     return (
         <>
-            <div className={css.main}>
+            <div className={css.main} data-testid="user-overview">
                 <SearchAndSort
                     search={search}
                     setSearch={setSearch}
