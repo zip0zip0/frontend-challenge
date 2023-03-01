@@ -16,7 +16,7 @@ type Props = {
     search: string;
     setSearch: (search: string) => void;
     sortBy: 'name' | 'city' | 'company';
-    setSortBy: (sortBy: string) => void;
+    setSortBy: (sortBy: 'name' | 'city' | 'company') => void;
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
