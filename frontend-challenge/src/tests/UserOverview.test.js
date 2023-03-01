@@ -87,4 +87,15 @@ describe('UserOverview', () => {
         // Checking that the state was set correctly
         expect(getByText('Leanne Graham')).toBeInTheDocument();
     });
+
+    it('renders error message when fetch fails', async () => {
+        global.fetch = jest.fn(() => Promise.reject('API is down'));
+        const { getByText } = render(<UsersOverview />);
+    
+        await act(async () => {
+            await Promise.resolve();
+        });
+    
+        expect(getByText('No contacts found')).toBeInTheDocument();
+    });
 });

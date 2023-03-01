@@ -107,24 +107,30 @@ export default function UsersOverview() {
                     sortBy={sortBy}
                     setSortBy={setSortBy}
                 />
-                <div className={css.dataGrid}>
-                    {usersToView.map((user) => (
-                        <UserCard
-                            setSelectedUser={setSelectedUser}
-                            setOpenDialog={setOpenDialog}
-                            key={user.id}
-                            user={user}
-                        />
-                    ))}
-                </div>
+                {usersToView.length ? (
+                    <div className={css.dataGrid}>
+                        {usersToView.map((user) => (
+                            <UserCard
+                                setSelectedUser={setSelectedUser}
+                                setOpenDialog={setOpenDialog}
+                                key={user.id}
+                                user={user}
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    <div>
+                        <h1 style={{color: 'grey'}}>No contacts found</h1>
+                    </div>
+                )}
             </div>
-            { selectedUser !== null &&
+            {selectedUser !== null && (
                 <UserDialog
                     open={openDialog}
                     onClose={() => setOpenDialog(false)}
                     user={selectedUser}
                 />
-            }
+            )}
         </>
     );
 }
