@@ -11,74 +11,56 @@ type Props = {
 
 const useStyles = makeStyles({
     main: {
-        width: '85vw',
+        display: 'flex',
+        flexDirection: 'column',
+        flex: 1,
     },
     content: {
+        margin: '50px',
+    },
+    footer: {
         display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        flex: 1,
-        margin: '40px 0px 40px 0px',
-        overflow: 'auto',
-    },
-    mainCard: {
-        minWidth: 275,
-        margin: '16px',
-    },
-    title: {
-        fontSize: 14,
-    },
-    pos: {
-        marginBottom: 12,
+        justifyContent: 'flex-end',
+        padding: '20px',
     },
 });
 
 export default function UserDialog({ open, onClose, user }: Props) {
     const css = useStyles();
 
-    const renderCards = (obj: User | User['address'] | User['company']) => {
-        return Object.keys(obj).map((key, index) => {
-            const value = obj[key];
-            if (typeof value === 'object') {
-                return (
-                    <Card key={key} className={css.mainCard}>
-                        <CardContent>
-                            <Typography variant="h5" component="h2">
-                                {key}
-                            </Typography>
-                            {renderCards(value)}
-                        </CardContent>
-                    </Card>
-                );
-            } else {
-                return (
-                    <Card key={key} className={css.mainCard}>
-                        <CardContent>
-                            <Typography
-                                className={css.title}
-                                color="textSecondary"
-                                gutterBottom
-                            >
-                                {key}
-                            </Typography>
-                            <Typography variant="h5" component="h2">
-                                {value}
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                );
-            }
-        });
+    const loremCreator = (nr: number) => {
+        const lorem = [];
+        for (let i = 0; i < nr; i++) {
+            lorem.push(
+                <>
+                    <p>
+                        Lorem ipsum dolor, sit amet consectetur adipisicing
+                        elit. Pariatur, quaerat. Cupiditate facilis sequi labore
+                        fugit eum veniam beatae, molestiae vero praesentium
+                        natus harum ipsa ipsum accusamus. Repudiandae quidem id
+                        blanditiis.
+                    </p>
+                    <br />
+                </>
+            );
+        }
+        return lorem;
     };
 
     return (
-        <Dialog open={open} onClose={onClose} fullWidth>
+        <Dialog open={open} onClose={onClose} fullWidth maxWidth="lg">
             <DialogTitle id={user.id.toString()}>{user.name}</DialogTitle>
-            <div className={css.content}>
-                <div>{renderCards(user)}</div>
-                <div>
-                    <Button variant='contained' color='success' onClick={onClose}>Close</Button>
+            <div className={css.main}>
+                <div className={css.content} >{loremCreator(10)}</div>
+                <div className={css.footer}>
+                    <Button
+                        size="large"
+                        variant="contained"
+                        color="success"
+                        onClick={onClose}
+                    >
+                        Close
+                    </Button>
                 </div>
             </div>
         </Dialog>
