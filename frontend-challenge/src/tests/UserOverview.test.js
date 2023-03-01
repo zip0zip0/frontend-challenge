@@ -98,4 +98,35 @@ describe('UserOverview', () => {
     
         expect(getByText('No contacts found')).toBeInTheDocument();
     });
+
+    // This test is not working,,, not sure why
+    it('When the "search" state variable is set to "Rolf", expect "no contacts found" to be rendered', async () => {
+        const { getByText, rerender } = render(<UsersOverview />);
+        
+        await act(async () => {
+            await Promise.resolve();
+        });
+        
+        expect(getByText('Leanne Graham')).toBeInTheDocument();
+        expect(getByText('Ervin Howell')).toBeInTheDocument();
+        
+        // Set the "search" state variable to "Rolf"
+        const searchInput = document.querySelector('input');
+        searchInput.value = 'Rolf';
+        
+        // Simulate the "onChange" event on the input element
+        searchInput.dispatchEvent(new Event('change', { bubbles: true }));
+        
+        // Re-render the component
+        rerender(<UsersOverview />);
+        
+        await act(async () => {
+            await Promise.resolve();
+        });
+        
+        // Check that the "no contacts found" message is displayed
+        await act(async () => {
+            expect(getByText('No contacts found')).toBeInTheDocument();
+        });
+    });
 });
